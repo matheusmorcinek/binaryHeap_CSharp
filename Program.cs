@@ -14,13 +14,23 @@ namespace binaryHeap_CSharp
 
             Heap heap = new Heap();
 
-            Random random = new Random();
-            for(int i = 0; i < 10; i++)
-            {
-                var randomNumber = random.Next(100);
-                heap.Put(randomNumber);
-            }
+            //Random random = new Random();
+            //for(int i = 0; i < 10; i++)
+            //{
+            //    var randomNumber = random.Next(100);
+            //    heap.Put(randomNumber);
+            //}
 
+            heap.Put(29);
+            heap.Put(9);
+            heap.Put(23);
+            heap.Put(17);
+            heap.Put(44);
+            heap.Put(5);
+            heap.Put(2);
+
+            heap.Print();
+            heap.PrintArray();
         }
     }
 
@@ -74,7 +84,30 @@ namespace binaryHeap_CSharp
 
         private void SiftDown(int index)
         {
-            //TODO
+
+            var leftChild = GetLeftChild(index);
+            var rightChild = GetRightChild(index);
+
+            int bigger = index;
+
+            if (leftChild < size && array[leftChild] > array[index])
+            {
+                bigger = leftChild;
+            }
+
+            if(rightChild < size && array[rightChild] > array[index])
+            {
+                bigger = rightChild;
+            }
+
+            if(bigger != index)
+            {
+                int temp = array[bigger];
+                array[bigger] = array[index];
+                array[index] = temp;
+                SiftDown(bigger);
+            }
+
         }
 
         public int Get()
@@ -121,6 +154,16 @@ namespace binaryHeap_CSharp
         {
             Console.WriteLine("");
             Print(0, 1, 32);
+            Console.WriteLine("");
+        }
+
+        public void PrintArray()
+        {
+            Console.WriteLine("");
+            for(int x = 0; x < size; x++)
+            {
+                Console.Write(array[x] + " ");
+            }
             Console.WriteLine("");
         }
 
